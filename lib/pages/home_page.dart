@@ -5,6 +5,7 @@ import 'package:workout_planner/constants/responsive.dart';
 import 'package:workout_planner/data/equipment.dart';
 import 'package:workout_planner/data/exercise_data.dart';
 import 'package:workout_planner/data/user_data.dart';
+import 'package:workout_planner/pages/equipments_page.dart';
 import 'package:workout_planner/pages/exercise_details_page.dart';
 import 'package:workout_planner/widgets/exercise_card.dart';
 import 'package:workout_planner/widgets/progress_cart.dart';
@@ -89,39 +90,84 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => ExerciseDetailsPage(
                                 exerciseTitle: "Warmup",
                                 exerciseDescription:
-                                    "a period or act of preparation for a match, performance, or exercise session, involving gentle exercise or practice.",
+                                    "A period or act of preparation for a match, performance, or exercise session, involving gentle exercise or practice.",
                                 exerciseList: exerciseList,
                               ),
                             ));
                       },
-                      child: ExerciseCard(
+                      child: const ExerciseCard(
                         title: "Warmup",
                         imageUrl: "assets/images/exercises/pilates.png",
                         description: "see more",
                       ),
                     ),
-                    ExerciseCard(
-                      title: "Equipment",
-                      imageUrl: "assets/images/equipments/dumbbell.png",
-                      description: "see more",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EquiomentDetailsPage(
+                              equipmentTitle: "Equipment",
+                              equipmentDescription:
+                                  "A period or act of preparation for a match, performance, or exercise session, involving gentle exercise or practice.",
+                              equipmentList: equipmentList,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const ExerciseCard(
+                        title: "Equipment",
+                        imageUrl: "assets/images/equipments/dumbbell.png",
+                        description: "see more",
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 13,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ExerciseCard(
-                      title: "Exercise",
-                      imageUrl: "assets/images/exercises/pullups.png",
-                      description: "see more",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ExerciseDetailsPage(
+                              exerciseTitle: "Excercise",
+                              exerciseDescription:
+                                  "A period or act of preparation for a match, performance, or exercise session, involving gentle exercise or practice.",
+                              exerciseList: exerciseList,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const ExerciseCard(
+                        title: "Exercise",
+                        imageUrl: "assets/images/exercises/pullups.png",
+                        description: "see more",
+                      ),
                     ),
-                    ExerciseCard(
-                      title: "Stretching",
-                      imageUrl: "assets/images/equipments/dumbbells.png",
-                      description: "see more",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ExerciseDetailsPage(
+                              exerciseTitle: "Streching",
+                              exerciseDescription:
+                                  "A period or act of preparation for a match, performance, or exercise session, involving gentle exercise or practice.",
+                              exerciseList: exerciseList,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const ExerciseCard(
+                        title: "Stretching",
+                        imageUrl: "assets/images/equipments/dumbbells.png",
+                        description: "see more",
+                      ),
                     ),
                   ],
                 ),
