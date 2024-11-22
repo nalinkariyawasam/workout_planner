@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_planner/constants/colors.dart';
 import 'package:workout_planner/constants/responsive.dart';
 import 'package:workout_planner/data/user_data.dart';
+import 'package:workout_planner/widgets/add_exercise_card.dart';
 
 class AddNewPage extends StatefulWidget {
   const AddNewPage({super.key});
@@ -38,9 +39,21 @@ class _AddNewPageState extends State<AddNewPage> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
+                  color: kMainColor,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              const Text(
+                "All Exercises",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                   color: kMainBlackColor,
                 ),
               ),
+              AddExerciseCard()
             ],
           ),
         ),
