@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:workout_planner/constants/colors.dart';
 import 'package:workout_planner/constants/responsive.dart';
 import 'package:workout_planner/models/equipment_model.dart';
+import 'package:workout_planner/widgets/equipment_card.dart';
 
 class EquiomentDetailsPage extends StatefulWidget {
   final String equipmentTitle;
@@ -65,6 +66,28 @@ class _EquiomentDetailsPageState extends State<EquiomentDetailsPage> {
                 fontWeight: FontWeight.normal,
                 color: kMainBlackColor,
               ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                crossAxisSpacing: kDeaultPadding,
+                mainAxisSpacing: kDeaultPadding,
+              ),
+              itemBuilder: (context, index) {
+                Equipment equipment = widget.equipmentList[index];
+                return EquipmentCard(
+                  equipmentName: equipment.equipmentName,
+                  equipmentDescription: equipment.equipmentDescription,
+                  equipmentImageUrl: equipment.equipmentImageUrl,
+                  noOfminuites: equipment.noOfminuites,
+                  noOfCalories: equipment.noOfCalories,
+                );
+              },
             ),
           ],
         ),
