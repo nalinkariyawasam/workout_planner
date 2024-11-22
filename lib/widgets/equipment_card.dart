@@ -32,7 +32,7 @@ class EquipmentCard extends StatelessWidget {
               equipmentName,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 20,
               ),
             ),
             const SizedBox(
@@ -46,7 +46,7 @@ class EquipmentCard extends StatelessWidget {
                   width: 100,
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 30,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +76,8 @@ class EquipmentCard extends StatelessWidget {
               equipmentDescription,
               style: const TextStyle(
                 fontSize: 16.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
+                color: kMainBlackColor,
               ),
             ),
           ],

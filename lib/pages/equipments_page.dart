@@ -78,6 +78,7 @@ class _EquiomentDetailsPageState extends State<EquiomentDetailsPage> {
                   crossAxisCount: 1,
                   crossAxisSpacing: kDeaultPadding,
                   mainAxisSpacing: kDeaultPadding,
+                  childAspectRatio: 3 / 2,
                 ),
                 itemCount: widget.equipmentList.length,
                 itemBuilder: (context, index) {
