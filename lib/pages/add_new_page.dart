@@ -4,6 +4,7 @@ import 'package:workout_planner/constants/responsive.dart';
 import 'package:workout_planner/data/exercise_data.dart';
 import 'package:workout_planner/data/user_data.dart';
 import 'package:workout_planner/models/exercise_model.dart';
+import 'package:workout_planner/widgets/add_equipment_card.dart';
 import 'package:workout_planner/widgets/add_exercise_card.dart';
 
 class AddNewPage extends StatefulWidget {
@@ -90,10 +91,10 @@ class _AddNewPageState extends State<AddNewPage> {
                       toggleAddFavExercise: () {
                         setState(() {
                           if (userData.favExerciseList.contains(exercise)) {
-                            userData.removeExercise(exercise);
+                            userData.removeFavExercise(exercise);
                             print(userData.favExerciseList.length);
                           } else {
-                            userData.removeExercise(exercise);
+                            userData.addFavExercise(exercise);
                             print(userData.favExerciseList.length);
                           }
                         });
@@ -103,6 +104,21 @@ class _AddNewPageState extends State<AddNewPage> {
                   },
                 ),
               ),
+              SizedBox(
+                height: 15,
+              ),
+              const Text(
+                "All Equipments",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: kMainBlackColor,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              AddEquipmentCard(),
             ],
           ),
         ),

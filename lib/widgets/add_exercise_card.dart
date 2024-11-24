@@ -107,7 +107,7 @@ class _AddExerciseCardState extends State<AddExerciseCard> {
                         widget.toggleAddFavExercise();
                       },
                       icon: Icon(
-                      widget.isAdded? Icons.favorite : Icons.favorite_border,
+                      widget.isFavourite? Icons.favorite : Icons.favorite_border,
                         size: 30,
                         color: kMainPinkColor,
                       ),
