@@ -8,13 +8,23 @@ class AddEquipmentCard extends StatefulWidget {
   final int noOfminuites;
   final double noOfCalories;
   final String equipmentDescription;
-  const AddEquipmentCard(
-      {super.key,
-      required this.equipmentName,
-      required this.equipmentImageUrl,
-      required this.noOfminuites,
-      required this.noOfCalories,
-      required this.equipmentDescription});
+  final void Function() toggleAddEquipment;
+  final void Function() toggleAddFavEquipment;
+  final bool isAddEquipment;
+  final bool isAddFavEquipment;
+
+  const AddEquipmentCard({
+    super.key,
+    required this.equipmentName,
+    required this.equipmentImageUrl,
+    required this.noOfminuites,
+    required this.noOfCalories,
+    required this.equipmentDescription,
+    required this.toggleAddEquipment,
+    required this.isAddEquipment,
+    required this.toggleAddFavEquipment,
+    required this.isAddFavEquipment,
+  });
 
   @override
   State<AddEquipmentCard> createState() => _AddEquipmentCardState();
@@ -25,6 +35,7 @@ class _AddEquipmentCardState extends State<AddEquipmentCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: kCardBgColor,
         borderRadius: BorderRadius.circular(15),
@@ -37,19 +48,22 @@ class _AddEquipmentCardState extends State<AddEquipmentCard> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(kDeaultPadding * 2),
+        padding: const EdgeInsets.symmetric(
+          vertical: kDeaultPadding,
+          horizontal: kDeaultPadding * 2,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               widget.equipmentName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: kMainBlackColor,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -60,26 +74,32 @@ class _AddEquipmentCardState extends State<AddEquipmentCard> {
                   width: 100,
                   fit: BoxFit.cover,
                 ),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "We upgrade and organize",
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: kSubtitleColor,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.equipmentDescription,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: kMainDarkBlueColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "We upgrade and organize",
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: kSubtitleColor,
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
+                      Text(
+                        "Time : ${widget.noOfminuites.toString()} min and ${widget.noOfCalories.toString()} calories buried",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: kSubtitleColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -96,9 +116,11 @@ class _AddEquipmentCardState extends State<AddEquipmentCard> {
                       color: kSubtitleColor.withOpacity(0.2),
                     ),
                     child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
+                      onPressed: () {
+                        widget.toggleAddEquipment();
+                      },
+                      icon: Icon(
+                        widget.isAddEquipment ? Icons.remove : Icons.add,
                         size: 30,
                         color: kMainDarkBlueColor,
                       ),
@@ -112,9 +134,13 @@ class _AddEquipmentCardState extends State<AddEquipmentCard> {
                       color: kSubtitleColor.withOpacity(0.2),
                     ),
                     child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border,
+                      onPressed: () {
+                        widget.toggleAddFavEquipment();
+                      },
+                      icon: Icon(
+                        widget.isAddFavEquipment
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         size: 30,
                         color: kMainPinkColor,
                       ),

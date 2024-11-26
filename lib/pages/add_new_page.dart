@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:workout_planner/constants/colors.dart';
 import 'package:workout_planner/constants/responsive.dart';
+import 'package:workout_planner/data/equipment.dart';
 import 'package:workout_planner/data/exercise_data.dart';
 import 'package:workout_planner/data/user_data.dart';
+import 'package:workout_planner/models/equipment_model.dart';
 import 'package:workout_planner/models/exercise_model.dart';
 import 'package:workout_planner/widgets/add_equipment_card.dart';
 import 'package:workout_planner/widgets/add_exercise_card.dart';
@@ -19,6 +21,7 @@ class _AddNewPageState extends State<AddNewPage> {
   final userData = user;
   //exerciseList
   final exerciseList = ExerciesData().exerciseList;
+  final equipmentList = EquipmentData().equipmentList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,7 @@ class _AddNewPageState extends State<AddNewPage> {
                   color: kMainBlackColor,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               const Text(
@@ -47,7 +50,7 @@ class _AddNewPageState extends State<AddNewPage> {
                   color: kMainColor,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               const Text(
@@ -100,11 +103,10 @@ class _AddNewPageState extends State<AddNewPage> {
                         });
                       },
                     );
-                    ;
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               const Text(
@@ -118,7 +120,46 @@ class _AddNewPageState extends State<AddNewPage> {
               const SizedBox(
                 height: 15,
               ),
-              AddEquipmentCard(),
+              // List view the scrolls vertically
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 8.5,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    Equipment equipment = equipmentList[index];
+                    return AddEquipmentCard(
+                      equipmentName: equipment.equipmentName,
+                      equipmentImageUrl: equipment.equipmentImageUrl,
+                      noOfminuites: equipment.noOfminuites,
+                      noOfCalories: equipment.noOfCalories,
+                      equipmentDescription: equipment.equipmentDescription,
+                      isAddEquipment:
+                          userData.equipmentList.contains(equipment),
+                      isAddFavEquipment:
+                          userData.favEquipmentList.contains(equipment),
+                      toggleAddEquipment: () {
+                        setState(() {
+                          if (userData.equipmentList.contains(equipment)) {
+                            userData.removeEquipment(equipment);
+                            // print(userData.equipmentList.last.equipmentName);
+                          } else {
+                            userData.addEquipment(equipment);
+                          }
+                        });
+                      },
+                      toggleAddFavEquipment: () {
+                        setState(() {
+                          if (userData.favEquipmentList.contains(equipment)) {
+                            userData.removeFavEquipment(equipment);
+                          } else {
+                            userData.addFavEquipment(equipment);
+                          }
+                        });
+                      },
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
