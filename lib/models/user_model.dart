@@ -67,7 +67,28 @@ class User {
   }
 
   // method to remove an equipment from the equipment list
-   void removeFavEquipment(Equipment equipment) {
+  void removeFavEquipment(Equipment equipment) {
     favEquipmentList.remove(equipment);
+  }
+
+  //method to calculate the total minites sepnd
+  int calculatrTotalMinitesSpent() {
+    int totalMinitesSpent = 0;
+
+    //loop througt the exerciselist and calculate the no of minites
+    for (var exercise in exerciseList) {
+      totalMinitesSpent += exercise.noOfMinuites;
+    }
+    //loop througt the equipmen and calculate the no of minites
+    for (var equipment in equipmentList) {
+      totalMinitesSpent += equipment.noOfminuites;
+    }
+    return totalMinitesSpent;
+  }
+
+  // method to mark as an exercise as completed
+  void markExerciseAsCompleted(int exerciseId) {
+    final exercise =
+        exerciseList.firstWhere((exercise) => exercise.id == exerciseId);
   }
 }

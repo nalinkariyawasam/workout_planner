@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:workout_planner/constants/colors.dart';
 import 'package:workout_planner/constants/responsive.dart';
 import 'package:workout_planner/data/user_data.dart';
+import 'package:workout_planner/models/equipment_model.dart';
 import 'package:workout_planner/models/exercise_model.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _FavouritePageState extends State<FavouritePage> {
               const Text(
                 "Here are all your favorited workouts",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: FontWeight.w900,
                   color: kMainColor,
                 ),
@@ -69,6 +70,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   crossAxisCount: 2,
                   crossAxisSpacing: kDeaultPadding,
                   mainAxisSpacing: kDeaultPadding,
+                  childAspectRatio: 16 / 17,
                 ),
                 itemCount: userData.favExerciseList.length,
                 itemBuilder: (context, index) {
@@ -96,12 +98,86 @@ class _FavouritePageState extends State<FavouritePage> {
                             fit: BoxFit.cover,
                           ),
                           Text(
-                            favExercise.noOfMinuites.toString(),
+                            "${favExercise.noOfMinuites.toString()} Min Workout",
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.normal,
                               color: kMainPinkColor,
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Here are all your favorited Equipments",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w900,
+                  color: kMainColor,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: kDeaultPadding,
+                  mainAxisSpacing: kDeaultPadding,
+                  childAspectRatio: 16 / 27,
+                ),
+                itemCount: userData.favEquipmentList.length,
+                itemBuilder: (context, index) {
+                  Equipment favEquipment = userData.favEquipmentList[index];
+                  return Card(
+                    color: kCardBgColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(kDeaultPadding),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            favEquipment.equipmentName,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Image.asset(
+                            favEquipment.equipmentImageUrl,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          Text(
+                            "${favEquipment.noOfminuites.toString()} Min Workout",
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: kMainPinkColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "${favEquipment.equipmentDescription}",
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                              color: kSubtitleColor,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
