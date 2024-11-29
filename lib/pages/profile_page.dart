@@ -61,8 +61,8 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 20,
               ),
-              const ProgressCard(
-                progressValue: 0.4,
+              ProgressCard(
+                progressValue: userData.calculateTotalCaloriesBurned(),
                 total: 100,
               ),
               const SizedBox(
@@ -90,9 +90,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      const Text(
-                        "Total Exersice Completed: 50",
-                        style: TextStyle(
+                      Text(
+                        "Total Exersice Completed: ${userData.totlaExercisesCompleted.toString()}",
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                           color: kMainBlackColor,
@@ -101,9 +101,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      const Text(
-                        "Total Equipment HandOver: 50",
-                        style: TextStyle(
+                      Text(
+                        "Total Equipment HandOver: ${userData.totlaEquipmentHandedOver.toString()}",
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                           color: kMainBlackColor,
@@ -137,7 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   return ProfileCart(
                     taskName: userExercise.exerciseName,
                     taskImageUrl: userExercise.exerciseImageUrl,
-                    markAsDone: () {},
+                    markAsDone: () {
+                      setState(() {
+                        userData.markExerciseAsCompleted(userExercise.id);
+                      });
+                    },
                   );
                 },
               ),
@@ -165,7 +169,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   return ProfileCart(
                     taskName: userEquipment.equipmentName,
                     taskImageUrl: userEquipment.equipmentImageUrl,
-                    markAsDone: () {},
+                    markAsDone: () {
+                      setState(() {
+                        userData.markAsHandOvered(userEquipment.id);
+                      });
+                    },
                   );
                 },
               )

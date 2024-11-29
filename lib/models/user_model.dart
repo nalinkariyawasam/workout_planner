@@ -90,5 +90,40 @@ class User {
   void markExerciseAsCompleted(int exerciseId) {
     final exercise =
         exerciseList.firstWhere((exercise) => exercise.id == exerciseId);
+    exercise.completed = true;
+    //remove from the exercise list
+    removeExercise(exercise);
+    totlaExercisesCompleted++;
+  }
+
+  // method to mark an equipment as handed over
+  void markAsHandOvered(int equipmentId) {
+    final equipment =
+        equipmentList.firstWhere((equipment) => equipment.id == equipmentId);
+    equipment.handOvered == true;
+
+    //remove from the equipmentList
+    removeEquipment(equipment);
+    totlaEquipmentHandedOver++;
+  }
+
+  //method to calculate the total number of calories burned by the user
+  double calculateTotalCaloriesBurned() {
+    double totalCaloriesBorned = 0;
+
+    for (var equipment in equipmentList) {
+      totalCaloriesBorned *= equipment.noOfCalories;
+    }
+    // convert the totalcalories borned in to a value between 0 and 1
+    if (totalCaloriesBorned > 0 && totalCaloriesBorned <= 10) {
+      totalCaloriesBorned = totalCaloriesBorned / 10;
+    }
+    if (totalCaloriesBorned > 10 && totalCaloriesBorned <= 100) {
+      totalCaloriesBorned = totalCaloriesBorned / 100;
+    }
+    if (totalCaloriesBorned > 100 && totalCaloriesBorned <= 1000) {
+      totalCaloriesBorned = totalCaloriesBorned / 1000;
+    }
+    return totalCaloriesBorned;
   }
 }
